@@ -2,12 +2,14 @@ import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import authRoutes from './routes/authRoutes.js';
+import workoutRoutes from './routes/workoutRoutes.js';
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
+app.use('/api/workouts', workoutRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() =>     {
@@ -17,3 +19,5 @@ mongoose.connect(process.env.MONGO_URI)
        });
     })
     .catch(err => console.error('MongoDB connection error:', err));
+
+export default app;
